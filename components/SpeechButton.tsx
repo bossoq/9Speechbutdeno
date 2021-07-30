@@ -21,7 +21,7 @@ export default function SpeechButton (data: any): any {
           >
             {label}
           </button>
-          <audio controls autoPlay ref={audio => (audio && soundRef.current.push(audio))} key={i} preload="metadata">
+          <audio autoPlay ref={audio => (audio && soundRef.current.push(audio))} key={i} preload="metadata">
             <source src={`/sounds/${filename}.mp3`} type="audio/mpeg" />
           </audio>
         </>
