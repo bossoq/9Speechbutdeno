@@ -2,3 +2,6 @@
 Thumbs.db
 .aleph/
 dist/
+.deno_plugins
+.vscode
+.aleph
