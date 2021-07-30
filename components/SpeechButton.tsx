@@ -1,27 +1,32 @@
-import React from "react"
-import { useRef } from "react"
+import React, { useRef } from "react"
 
-export default function SpeechButton (data: any): any {
+export default function SpeechButton (data: { label: string, filename: string }): Element[] {
+  interface IData {
+    label: string,
+    filename: string
+  }
+  const dataObj: IData[] = Object.values(data)
   const soundRef = useRef<HTMLAudioElement[]>([])
-  console.log(soundRef)
   const play = (i: number) => {
-    if(soundRef.current[i]) {
+    if (soundRef.current[i]) {
       soundRef.current[i].pause()
       soundRef.current[i].currentTime = 0
       soundRef.current[i].play()
     }
   }
-  return(
-    Object.entries(data).map(([i, { label, filename }]: any) => {
+  return (
+    dataObj.map((record, i): Element => {
+      const label: string = record.label
+      const filename: string = record.filename
       return (
         <>
           <button
-            className="text-xl text-center px-4 py-2 rounded bg-red-500 m-4"
+            className="button is-danger is-medium has-text-weight-bold m-3"
             onClick={() => play(i)}
           >
             {label}
           </button>
-          <audio autoPlay ref={audio => (audio && soundRef.current.push(audio))} key={i} preload="metadata">
+          <audio ref={audio => (audio && soundRef.current.push(audio))} key={i} preload="metadata">
             <source src={`/sounds/${filename}.mp3`} type="audio/mpeg" />
           </audio>
         </>
